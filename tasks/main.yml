@@ -1,0 +1,49 @@
+---
+- name: Download cachet plugin
+  get_url:
+    url: "{{ cachet_nagios_srcurl }}/cachet_notify"
+    dest: "{{ cachet_nagios_eventdir }}/cachet_notify"
+    mode: 0755
+  tags:
+    - cachet_nagios
+    - cachet_nagios-plugin
+
+- name: Update cachet URI endpoint
+  lineinfile:
+    path: "{{ cachet_nagios_eventdir }}/cachet_notify"
+    regexp: '^\$cachet_url ='
+    line: '$cachet_url = "{{ cachet_nagios_apiurl }}"'
+  tags:
+    - cachet_nagios
+    - cachet_nagios-creds
+
+- name: Update cachet API-key
+  lineinfile:
+    path: '{{ cachet_nagios_eventdir }}/cachet_notify'
+    regexp: '^\$api_key ='
+    line: '$api_key = "{{ cachet_nagios_apikey }}"'
+  tags:
+    - cachet_nagios
+    - cachet_nagios-creds
+
+- name: Update Incident prefix
+  lineinfile:
+    path: '{{ cachet_nagios_eventdir }}/cachet_notify'
+    regexp: '^\$incident_prefix ='
+    line: '$incident_prefix = "{{ cachet_nagios_incidents_prefix }}"'
+
+- name: Define subscriber notification
+  lineinfile:
+    path: '{{ cachet_nagios_eventdir }}/cachet_notify'
+    regexp: '^\$cachet_notify_subscribers ='
+    line: '$cachet_notify_subscribers = {{ cachet_nagios_notify_subscribers }}'
+
+- name: Deploy related nagios commands
+  template:
+    src: nagios-command.cfg.j2
+    dest: '{{ cachet_nagios_command_incdir }}/cachet.cfg'
+    owner: 'root'
+    group: 'root'
+  tags:
+    - cachet_nagios
+    - cachet_nagios-command

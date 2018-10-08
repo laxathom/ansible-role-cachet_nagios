@@ -1,0 +1,4 @@
+define command {
+    command_name     notify-by-cachet
+    command_line     {{ cachet_nagios_eventdir }}/cachet_notify '$ARG1$' '$SERVICEDESC$' '$SERVICESTATE$' '$SERVICESTATETYPE$' '$SERVICEOUTPUT$'
+}

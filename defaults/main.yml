@@ -1,0 +1,9 @@
+---
+cachet_nagios_srcurl: "https://raw.githubusercontent.com/mpellegrin/nagios-eventhandler-cachet/master"
+cachet_nagios_eventdir: "/usr/lib64/nagios/plugins/eventhandlers"
+cachet_nagios_command_incdir: /etc/nagios/commands.d
+
+cachet_nagios_apiurl: https://status.domain.tld/api/v1/
+cachet_nagios_apikey: "jw0eucaslfknq3p0fsha9dsajilsu"
+cachet_nagios_incidents_prefix: [nagios]
+cachet_nagios_notify_subscribers: 'true'
