@@ -3,6 +3,7 @@ dependencies: []
 
 galaxy_info:
   author: laxathom
+  role_name: cachet_nagios
   description: Cachet event-handler for nagios.
   company: "iFeelSmart"
   license: "MIT"
